@@ -1,4 +1,4 @@
-
+/.phpunit.cache
 /node_modules
 /public/build
 /public/hot
@@ -10,7 +10,7 @@
 .env.backup
 .env.production
 .phpactor.json
-
+.phpunit.result.cache
 Homestead.json
 Homestead.yaml
 npm-debug.log

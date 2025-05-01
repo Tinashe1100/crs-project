@@ -29,7 +29,7 @@
                             <div>{{ Auth::user()->name }}</div>
 
                             <div class="tw-ms-1">
-                                <svg class="tw-fill-current tw-h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                <svg class="tw-fill-current tw-h-4 tw-w-4" xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20">
                                     <path fill-rule="evenodd"
                                         d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
@@ -59,11 +59,11 @@
             </div>
 
             <!-- Hamburger -->
-            <div class="tw--me-2 flex tw-items-center sm:tw-hidden">
+            <div class="tw-me-2 tw-flex tw-items-center sm:tw-hidden">
                 <button @click="open = ! open"
-                    class="tw-inline-flex tw-items-center tw-justify-center tw-p-2 tw-rounded-md tw-text-gray-400 dark:tw-text-gray-500 hover:tw-text-gray-500 dark:tw-hover:text-gray-400 hover:tw-bg-gray-100 dark:tw-hover:bg-gray-900 focus:tw-outline-none focus:tw-bg-gray-100 dark:tw-focus:bg-gray-900 focus:tw-text-gray-500 dark:tw-focus:text-gray-400 tw-transition tw-duration-150 tw-ease-in-out">
+                    class="tw-inline-flex tw-items-center tw-justify-center tw-p-2 tw-rounded-md tw-text-gray-400 dark:tw-text-gray-500 hover:tw-text-gray-500 dark:hover:tw-text-gray-400 hover:tw-bg-gray-100 dark:hover:tw-bg-gray-900 focus:tw-outline-none focus:tw-bg-gray-100 dark:focus:tw-bg-gray-900 focus:tw-text-gray-500 dark:focus:tw-text-gray-400 tw-transition tw-duration-150 tw-ease-in-out">
                     <svg class="tw-h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                        <path :class="{ 'hidden': open, 'inline-flex': !open }" class="tw-inline-flex"
+                        <path :class="{ 'tw-hidden': open, 'tw-inline-flex': !open }" class="tw-inline-flex"
                             stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 6h16M4 12h16M4 18h16" />
                         <path :class="{ 'tw-hidden': !open, 'tw-inline-flex': open }" class="tw-hidden"

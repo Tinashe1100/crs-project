@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Report;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\File;
+
+use function PHPSTORM_META\type;
 
 class ReportController extends Controller
 {
@@ -12,7 +15,7 @@ class ReportController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard');
     }
 
     /**
@@ -20,7 +23,7 @@ class ReportController extends Controller
      */
     public function create()
     {
-        //
+        return view('report');
     }
 
     /**
@@ -28,7 +31,24 @@ class ReportController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = request()->validate([
+            'type' => 'required',
+            'corruption_date' => 'required',
+            'location' => 'required',
+            'reporter' => 'required',
+            'details' => 'required',
+            'evidence' => ['required', File::types(['mp3', 'jpg', 'png', 'doc', 'pdf',])]
+        ]);
+
+        if (request()->hasFile('evidence')) {
+            $data['evidence'] = request()->file('evidence')->store('evidence', 'public');
+        }
+
+        if (Report::create($data)) {
+            return redirect('/')->with('message', 'Your case has been submitted');
+        } else {
+            echo "error";
+        }
     }
 
     /**

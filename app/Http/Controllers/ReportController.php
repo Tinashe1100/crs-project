@@ -15,7 +15,7 @@ class ReportController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        return view('dashboard.reports');
     }
 
     /**
@@ -23,7 +23,9 @@ class ReportController extends Controller
      */
     public function create()
     {
-        return view('report');
+        return view('report', [
+            'email' => request()->session()->get('email'),
+        ]);
     }
 
     /**
@@ -56,7 +58,11 @@ class ReportController extends Controller
      */
     public function show(Report $report)
     {
-        //
+
+
+        return view('dashboard.report-details', [
+            'case' => $report,
+        ]);
     }
 
     /**

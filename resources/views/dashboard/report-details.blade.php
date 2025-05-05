@@ -33,6 +33,26 @@
             </div>
         </div>
 
+        <div class="col-12 col-sm-12 col-md-6 col-xl-3">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Uploaded Evidence</h4>
+                </div>
+
+                <div class="tw-flex tw-justify-around card-body">
+                    <img src="{{ asset('assets/img/image-64.png') }}" alt="">
+                    <div class="span tw-w-3/5">{{ $case->evidence }}</div>
+                </div>
+                <div class="card-footer tw-flex tw-items-center tw-justify-between">
+                    <a href="{{ route('evidence.download', ['report' => $case->id]) }}" class="btn btn-primary">Download
+                        Files</a>
+                    <span class="text-muted">Uploaded: {{ $case->corruption_date }}</span>
+                </div>
+            </div>
+        </div>
+
     </div>
+
+    {{-- <img src="{{ asset('storage/' . $case->evidence) }}" alt="image"> --}}
 
 </x-app-layout>

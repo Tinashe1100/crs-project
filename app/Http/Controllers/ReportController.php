@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Report;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules\File;
 
 use function PHPSTORM_META\type;
@@ -52,6 +53,25 @@ class ReportController extends Controller
             echo "error";
         }
     }
+
+    /**
+     * Download reported case evidence
+     */
+    public function download(Report $report)
+    {
+
+        // get file name
+        $fileName = $report->evidence;
+        // get storage path - downloaded files are stored in the app's storage path
+        $path = storage_path('app/public/' . $fileName);
+        // check for file
+        if (file_exists($path)) {
+            // download evidence
+            return response()->download($path);
+        }
+    }
+
+
 
     /**
      * Display the specified resource.

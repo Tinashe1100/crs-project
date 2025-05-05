@@ -17,13 +17,12 @@ Route::get('dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('profile', [ProfileController::class, 'edit'])->name('profile');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('users', [ProfileController::class, 'index'])->name('users');
     Route::get('add-user', [ProfileController::class, 'create'])->name('add-user');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::post('create-user', [ProfileController::class, 'store'])->name('create-user');
     Route::delete('delete-user/{user}', [ProfileController::class, 'deleteUser'])->name('delete-user');
-
-    Route::get('users', [ProfileController::class, 'index'])->name('users');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 Route::controller(RegistrationController::class)->group(function () {
@@ -39,6 +38,7 @@ Route::controller(ReportController::class)->group(function () {
 
 Route::controller(ReportController::class)->group(function () {
     Route::get('case-details/{report}', 'show')->name('case-details');
+    Route::get('download/{report}', 'download')->name('evidence.download');
 })->middleware('auth');
 
 

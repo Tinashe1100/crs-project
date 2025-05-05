@@ -21,7 +21,8 @@
             <li><a class="nav-link" href="{{ route('profile') }}"><i data-feather="sliders"></i><span>Profile</span></a>
             </li>
 
-            <li><a class="nav-link" href="{{ route('users') }}"><i data-feather="sliders"></i><span>Users</span></a>
+            <li><a class="nav-link" href="{{ route('users') }}"><i
+                        data-feather="sliders"></i><span>{{ Auth::user()->role === 'admin' ? 'Users' : '' }}</span></a>
             </li>
 
             {{-- <li class="dropdown">

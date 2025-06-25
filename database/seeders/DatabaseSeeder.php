@@ -22,38 +22,37 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        CorruptionType::create([
-            'name' => 'Bribery',
-        ]);
-        CorruptionType::create([
-            'name' => 'Embelzzlement',
-        ]);
-        CorruptionType::create([
-            'name' => 'Extortion',
-        ]);
-        CorruptionType::create([
-            'name' => 'Fraud',
-        ]);
-        CorruptionType::create([
-            'name' => 'Money Laundering',
-        ]);
-        CorruptionType::create([
-            'name' => 'Tax Evasion',
-        ]);
-        CorruptionType::create([
-            'name' => 'Obstruction of Justice',
-        ]);
-        CorruptionType::create([
-            'name' => 'False Accounting',
-        ]);
-        CorruptionType::create([
-            'name' => 'Misappropriation of Assets',
-        ]);
-
+        // CorruptionType::create([
+        //     'name' => 'Bribery',
+        // ]);
+        // CorruptionType::create([
+        //     'name' => 'Embelzzlement',
+        // ]);
+        // CorruptionType::create([
+        //     'name' => 'Extortion',
+        // ]);
+        // CorruptionType::create([
+        //     'name' => 'Fraud',
+        // ]);
+        // CorruptionType::create([
+        //     'name' => 'Money Laundering',
+        // ]);
+        // CorruptionType::create([
+        //     'name' => 'Tax Evasion',
+        // ]);
+        // CorruptionType::create([
+        //     'name' => 'Obstruction of Justice',
+        // ]);
+        // CorruptionType::create([
+        //     'name' => 'False Accounting',
+        // ]);
+        // CorruptionType::create([
+        //     'name' => 'Misappropriation of Assets',
+        // ]);
 
         DB::table('reports')->insert([
             [
-                'type' => 'Bribery',
+                'corruption_type' => 1,
                 'evidence' => 'Photo of money exchange',
                 'location' => 'Nairobi, Kenya',
                 'reporter' => 'John Doe',
@@ -62,7 +61,7 @@ class DatabaseSeeder extends Seeder
                 'corruption_date' => '2024-11-10',
             ],
             [
-                'type' => 'Embezzlement',
+                'corruption_type' => 1,
                 'evidence' => 'Bank statements',
                 'location' => 'Lagos, Nigeria',
                 'reporter' => 'Jane Smith',
@@ -71,7 +70,7 @@ class DatabaseSeeder extends Seeder
                 'corruption_date' => '2024-08-25',
             ],
             [
-                'type' => 'Nepotism',
+                'corruption_type' => 1,
                 'evidence' => 'Emails showing favoritism',
                 'location' => 'Accra, Ghana',
                 'reporter' => 'Michael Otieno',
@@ -80,7 +79,7 @@ class DatabaseSeeder extends Seeder
                 'corruption_date' => '2024-06-15',
             ],
             [
-                'type' => 'Procurement Fraud',
+                'corruption_type' => 1,
                 'evidence' => 'Fake invoices',
                 'location' => 'Kampala, Uganda',
                 'reporter' => 'Sarah Kimani',
@@ -89,7 +88,7 @@ class DatabaseSeeder extends Seeder
                 'corruption_date' => '2024-09-03',
             ],
             [
-                'type' => 'Kickbacks',
+                'corruption_type' => 1,
                 'evidence' => 'Voice note of negotiation',
                 'location' => 'Johannesburg, SA',
                 'reporter' => 'David Moyo',
@@ -98,7 +97,7 @@ class DatabaseSeeder extends Seeder
                 'corruption_date' => '2024-12-01',
             ],
             [
-                'type' => 'Misuse of Funds',
+                'corruption_type' => 1,
                 'evidence' => 'Signed reports, receipts',
                 'location' => 'Harare, Zimbabwe',
                 'reporter' => 'Rose Njeri',
@@ -107,7 +106,7 @@ class DatabaseSeeder extends Seeder
                 'corruption_date' => '2024-07-20',
             ],
             [
-                'type' => 'Favoritism',
+                'corruption_type' => 1,
                 'evidence' => 'Internal HR documents',
                 'location' => 'Addis Ababa, Ethiopia',
                 'reporter' => 'Peter Wanjiku',
@@ -116,7 +115,7 @@ class DatabaseSeeder extends Seeder
                 'corruption_date' => '2024-10-11',
             ],
             [
-                'type' => 'Bribery',
+                'corruption_type' => 1,
                 'evidence' => 'CCTV footage',
                 'location' => 'Lusaka, Zambia',
                 'reporter' => 'Aisha Abdalla',
@@ -125,7 +124,7 @@ class DatabaseSeeder extends Seeder
                 'corruption_date' => '2024-11-22',
             ],
             [
-                'type' => 'Extortion',
+                'corruption_type' => 1,
                 'evidence' => 'Recorded phone call',
                 'location' => 'Kigali, Rwanda',
                 'reporter' => 'Tom Muriuki',
@@ -134,7 +133,7 @@ class DatabaseSeeder extends Seeder
                 'corruption_date' => '2024-05-18',
             ],
             [
-                'type' => 'Fraud',
+                'corruption_type' => 1,
                 'evidence' => 'Email trail and forged documents',
                 'location' => 'Dar es Salaam, TZ',
                 'reporter' => 'Nancy Karanja',
@@ -142,6 +141,59 @@ class DatabaseSeeder extends Seeder
                 'status' => true,
                 'corruption_date' => '2024-04-30',
             ],
+        ]);
+
+
+        DB::table('statuses')->insert([
+            [
+                'name' => 'Pending',
+                'desc' => 'Case is being reviewed and investigated'
+            ],
+            [
+                'name' => 'Ongoing',
+                'desc' => 'Investigation is currently underway'
+            ],
+            [
+                'name' => 'Charges Pending',
+                'desc' => 'Charges are being prepared and will be filed soon'
+            ],
+            [
+                'name' => 'Convicted',
+                'desc' => 'Accused person has been found guilty and convicted'
+            ],
+            [
+                'name' => 'Acquitted',
+                'desc' => 'Accused person has been found not guilty'
+            ],
+            [
+                'name' => 'Unresolved',
+                'desc' => 'Case remains unsolved or ongoing'
+            ],
+            [
+                'name' => 'Evidence Collection',
+                'desc' => 'Gathering evidence and interviewing witnesses'
+            ],
+            [
+                'name' => 'Forensic Analysis',
+                'desc' => 'Forensic analysis is being conducted on evidence'
+            ],
+            [
+                'name' => 'Prosecution Pending',
+                'desc' => 'Case is being prepared for prosecution'
+            ],
+            [
+                'name' => 'Trial Ongoing',
+                'desc' => 'Trial is currently underway'
+            ],
+            [
+                'name' => 'Sentencing',
+                'desc' => 'Accused person is awaiting sentencing',
+            ],
+            [
+                'name' => 'Appeal',
+                'desc' => 'Case is on appeal',
+            ],
+
         ]);
     }
 }

@@ -23,8 +23,8 @@
             <x-input-label for="password" :value="__('User type')" class="tw-text-white" />
 
             <select name="role" class="tw-block tw-rounded-md tw-mt-1 tw-w-full" id="">
-                <option value="user">User</option>
                 <option value="admin">Admin</option>
+                <option value="investigator">Investigator</option>
             </select>
 
             <x-input-error :messages="$errors->get('password')" class="tw-mt-2" />

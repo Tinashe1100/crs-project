@@ -4,7 +4,7 @@
             <img src="{{ asset('assets/images/logo.png') }}" alt="Corruption Reporting System logo" class="">
         </a>
 
-        <div class="tw-flex tw-justify-between tw-items-center">
+        <div class="tw-flex tw-justify-between tw-items-center  tw-space-x-3">
             <p class="tw-font-medium tw-font-2xl">
                 Let's Take Action For A Corruption-free Society
             </p>

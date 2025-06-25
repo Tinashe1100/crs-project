@@ -23,7 +23,7 @@ class DataServiceProvider extends ServiceProvider
     {
         // fetch data from database
         $corruptionTypes = CorruptionType::all();
-        $cases = Report::all();
+
 
         // share first set of data - corruptionTypes data
         view()->composer('*', function ($view) use ($corruptionTypes) {
@@ -31,8 +31,8 @@ class DataServiceProvider extends ServiceProvider
         });
 
         // share first set of data - cases data
-        view()->composer('*', function ($view) use ($cases) {
-            $view->with('cases', $cases);
-        });
+        // view()->composer('*', function ($view) use ($cases) {
+        //     $view->with('cases', $cases);
+        // });
     }
 }

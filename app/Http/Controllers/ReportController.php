@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Report;
+use App\Models\Status;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules\File;
 
@@ -16,7 +21,28 @@ class ReportController extends Controller
      */
     public function index()
     {
-        return view('dashboard.reports');
+        // join reports and users table utilizing the foreign ids 
+        $cases = DB::table('reports')
+            ->leftJoin('users', 'reports.investigator', '=', 'users.id')
+            ->select('users.*', 'reports.*')
+            ->get()
+            ->merge(
+                DB::table('users')
+                    ->leftJoin('reports', 'users.id', '=', 'reports.investigator')
+                    ->where('reports.investigator', 'like', 'users.id')
+                    ->get()
+            );
+
+
+        // cases authenticated investigator can see
+        $investigatorCases = DB::table('reports')
+            ->where('investigator', Auth::user()->id)
+            ->get();
+
+        return view('dashboard.reports', [
+            'cases' => $cases,
+            'investigatorCases' => $investigatorCases,
+        ]);
     }
 
     /**
@@ -79,10 +105,50 @@ class ReportController extends Controller
     public function show(Report $report)
     {
 
+        $statuses = Status::all();
+        $investigators = DB::table('users')->where('role', 'investigator')->get();
 
         return view('dashboard.report-details', [
             'case' => $report,
+            'statuses' => $statuses,
+            'investigators' => $investigators
         ]);
+    }
+
+    /**
+     * Reported Case Status Update
+     */
+    public function statusUpdate(Report $report, Request $request)
+    {
+
+        $request->validate([
+            'status' => ['required',]
+        ]);
+
+        $report->update([
+            'investigator' => Auth::user()->id,
+            'status' => $request->status,
+        ]);
+
+        return redirect()->route('cases');
+    }
+    /**
+     * Reported Case investigation
+     */
+    public function investigation(Report $report, Request $request)
+    {
+        $request->validate([
+            'status' => ['required',],
+            'investigator' => ['required', 'numeric'],
+        ]);
+
+
+        $report->update([
+            'investigator' => $request->investigator,
+            'status' => $request->status,
+        ]);
+
+        return redirect()->route('cases');
     }
 
     /**
@@ -106,6 +172,7 @@ class ReportController extends Controller
      */
     public function destroy(Report $report)
     {
-        //
+        $report->destroy($report->id);
+        return redirect()->route('cases');
     }
 }

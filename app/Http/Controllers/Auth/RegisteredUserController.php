@@ -21,6 +21,13 @@ class RegisteredUserController extends Controller
     {
         return view('auth.register');
     }
+    /**
+     * Display the registration view for default user
+     */
+    public function signup(): View
+    {
+        return view('auth.registrations.signup');
+    }
 
     /**
      * Handle an incoming registration request.
@@ -38,7 +45,7 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'role' => $request->role,
+            'role' => $request->role == '' ? 'user' : $request->role,
             'password' => Hash::make($request->password),
         ]);
 

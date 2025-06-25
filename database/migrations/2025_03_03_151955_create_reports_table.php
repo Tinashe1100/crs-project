@@ -13,12 +13,15 @@ return new class extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
             $table->longText('evidence');
             $table->string('location');
             $table->string('reporter');
             $table->longText('details');
-            $table->boolean('status')->nullable(true);
+            $table->string('status')->nullable();
+            // foreign key constraints
+            $table->foreignId('corruption_type')->constrained('corruption_types', 'id')->onUpdate('cascade')->onDelete('cascade');
+            // foreign key constraints
+            $table->foreignId('investigator')->nullable()->constrained('users', 'id')->onDelete('set null');
             $table->date('corruption_date');
             $table->timestamps();
         });

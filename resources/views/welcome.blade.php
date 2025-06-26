@@ -9,6 +9,12 @@
             <a href="/report" class="tw-bg-white tw-mt-10 tw-px-7 tw-py-3 tw-font-medium tw-text-xl tw-rounded-lg">
                 Report Case
             </a>
+
+            @if (session('message'))
+                <div class="tw-text-white tw-font-bold tw-font-2xl tw-text-center">
+                    {{ session('message') }}
+                </div>
+            @endif
         </div>
     </section>
 </x-layout>

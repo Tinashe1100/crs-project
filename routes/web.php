@@ -5,6 +5,7 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\ReportController;
 use App\Http\Middleware\CheckRole;
 use App\Models\Report;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Psy\VersionUpdater\Checker;
@@ -13,13 +14,18 @@ Route::get('/', function () {
     return view('welcome');
 })->name('website');
 
-Route::get('dashboard', function () {
-    $cases = Report::latest()->get();
 
-    return view('dashboard', [
-        'cases' => $cases,
-    ]);
-})->name('dashboard')->middleware('auth', CheckRole::class . ':admin, investigator');
+
+Route::middleware('auth')->group(function () {
+    Route::get('dashboard', function () {
+        $cases = Report::latest()->get();
+        return view('dashboard', [
+            'cases' => $cases,
+            'users' => User::all(),
+        ]);
+    })->name('dashboard')->middleware(CheckRole::class . ':investigator,admin');
+});
+
 
 
 Route::middleware('auth')->group(function () {
@@ -34,7 +40,7 @@ Route::middleware('auth')->group(function () {
 
 Route::controller(ReportController::class)->group(function () {
     Route::get('report', 'create')->name('report');
-    Route::get('reported-cases', 'index')->name('cases')->middleware(CheckRole::class . ':admin, investigator');
+    Route::get('reported-cases', 'index')->name('cases')->middleware(CheckRole::class . ':investigator,admin');
     Route::post('submit', 'store')->name('submit');
 });
 
@@ -42,8 +48,8 @@ Route::controller(ReportController::class)->group(function () {
     Route::get('case-details/{report}', 'show')->name('case-details');
     Route::get('download/{report}', 'download')->name('evidence.download');
     Route::post('assign-status-update/{report}', 'investigation')->name('investigator.status.update')->middleware(CheckRole::class . ':admin, investigator');
-    Route::get('delete-case/{report}', 'destroy')->name('case.drop')->middleware(CheckRole::class . ':admin');
-    Route::post('status-update/{report}', 'statusUpdate')->name('status.update')->middleware(CheckRole::class . ':admin');
+    Route::get('delete-case/{report}', 'destroy')->name('case.drop')->middleware(CheckRole::class . ':investigator,admin');
+    Route::post('status-update/{report}', 'statusUpdate')->name('status.update')->middleware(CheckRole::class . ':investigator,admin');
 })->middleware('auth');
 
 

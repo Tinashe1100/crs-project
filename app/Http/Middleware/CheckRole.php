@@ -14,13 +14,14 @@ class CheckRole
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, ...$roles): Response
+
+    public function handle(Request $request, Closure $next, ...$role): Response
     {
         // redirect user to main website if user type is not admin or investigator
-        if (!Auth::user()->role == $roles) {
-            // return redirect()->route('website');
-            abort(403, 'PAGE FORBIDDEN');
+        if (!in_array(Auth::user()->role, $role)) {
+            abort(403);
         }
+
         return $next($request);
     }
 }

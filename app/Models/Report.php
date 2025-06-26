@@ -12,4 +12,12 @@ class Report extends Model
     {
         return $this->belongsTo(CorruptionType::class);
     }
+
+    public function scopeFilter($query, array $filters)
+    {
+
+        if ($filters['search'] ?? false) {
+            $query->where('reporter', 'like', '%' . request('search') . '%');
+        }
+    }
 }

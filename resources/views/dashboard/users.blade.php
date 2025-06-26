@@ -21,7 +21,7 @@
                                 <td> {{ $user->name }} </td>
                                 <td> {{ $user->email }} </td>
                                 <td>
-                                    <div class="badge badge-success">Active</div>
+                                    <div class="badge badge-danger"> {{ $user->role }} </div>
                                 </td>
                                 <td>
                                     <form action="{{ route('delete-user', [$user->id]) }}" method="post">

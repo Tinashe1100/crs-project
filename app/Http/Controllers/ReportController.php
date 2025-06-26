@@ -25,6 +25,9 @@ class ReportController extends Controller
         $cases = DB::table('reports')
             ->leftJoin('users', 'reports.investigator', '=', 'users.id')
             ->select('users.*', 'reports.*')
+            ->when(request('search'), function ($query) {
+                return $query->where('reporter', 'like', '%' . request('search') . '%');
+            })
             ->get()
             ->merge(
                 DB::table('users')

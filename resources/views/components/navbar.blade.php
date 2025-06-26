@@ -10,8 +10,10 @@
             <li>
                 <form class="form-inline mr-auto">
                     <div class="search-element">
-                        <input class="form-control" type="search" placeholder="Search" aria-label="Search"
-                            data-width="200">
+                        <form method="get">
+                            <input class="form-control" type="text" placeholder="Search" aria-label="Search"
+                                name="search" data-width="200">
+                        </form>
                         <button class="btn" type="submit">
                             <i class="fas fa-search"></i>
                         </button>
@@ -23,7 +25,8 @@
     <ul class="navbar-nav navbar-right">
 
         <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
-                class="nav-link notification-toggle nav-link-lg"><i data-feather="bell" class="bell"></i>
+                class="nav-link notification-toggle nav-link-lg">
+                {{-- <i data-feather="bell" class="bell"> </i> --}}
             </a>
             <div class="dropdown-menu dropdown-list dropdown-menu-right pullDown">
                 <div class="dropdown-header">
@@ -75,7 +78,7 @@
         </li>
         <li class="dropdown"><a href="#" data-toggle="dropdown"
                 class="nav-link dropdown-toggle nav-link-lg nav-link-user"> <img alt="image"
-                    src="assets/img/user.png" class="user-img-radious-style"> <span
+                    src="{{ asset('assets\images\IMG-20250626-WA0017.jpg') }}" class="user-img-radious-style"> <span
                     class="d-sm-none d-lg-inline-block"></span></a>
 
             <div class="dropdown-menu dropdown-menu-right pullDown">
